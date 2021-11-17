@@ -1,5 +1,0 @@
-#yay
-
-#flask
-sss
-s 
