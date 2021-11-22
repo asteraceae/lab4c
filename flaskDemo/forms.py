@@ -5,25 +5,37 @@ from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextA
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError,Regexp
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
 from flaskDemo import db
-from flaskDemo.models import User, Department, getDepartment, getDepartmentFactory
+import flaskDemo.models
 from wtforms.fields.html5 import DateField
 
-ssns = Department.query.with_entities(Department.mgr_ssn).distinct()
+
 #  or could have used ssns = db.session.query(Department.mgr_ssn).distinct()
 # for that way, we would have imported db from flaskDemo, see above
-
+ssns = Department.query.with_entities(Department.mgr_ssn).distinct()
 myChoices2 = [(row[0],row[0]) for row in ssns]  # change
 results=list()
 for row in ssns:
     rowDict=row._asdict()
     results.append(rowDict)
 myChoices = [(row['mgr_ssn'],row['mgr_ssn']) for row in results]
+
+essns = Employee.query.with_entities(Employee.ssn).distinct()
+essnlist = []
+for row in essns:
+    rowDict=row._asdict()
+    essnlist.append(rowDict)
+essnchoices = [(row['ssn'],row['ssn']) for row in essnlist]
+
+pnums = Project.query.with_entities(Project.pnumber).distinct()
+pnumslist = []
+for row in pnums:
+    rowDict=row._asdict()
+    pnumslist.append(rowDict)
+pnumschoices = [(row['ssn'],row['ssn']) for row in pnumslist]
+
 regex1='^((((19|20)(([02468][048])|([13579][26]))-02-29))|((20[0-9][0-9])|(19[0-9][0-9]))-((((0[1-9])'
 regex2='|(1[0-2]))-((0[1-9])|(1\d)|(2[0-8])))|((((0[13578])|(1[02]))-31)|(((0[1,3-9])|(1[0-2]))-(29|30)))))$'
 regex=regex1 + regex2
-
-
-
 
 class RegistrationForm(FlaskForm):
     username = StringField('Username',
@@ -79,7 +91,7 @@ class PostForm(FlaskForm):
     content = TextAreaField('Content', validators=[DataRequired()])
     submit = SubmitField('Post')
 
-    
+
 class DeptUpdateForm(FlaskForm):
 
 #    dnumber=IntegerField('Department Number', validators=[DataRequired()])
@@ -91,7 +103,7 @@ class DeptUpdateForm(FlaskForm):
 
 #  One of many ways to use SelectField or QuerySelectField.  Lots of issues using those fields!!
     mgr_ssn = SelectField("Manager's SSN", choices=myChoices)  # myChoices defined at top
-    
+
 # the regexp works, and even gives an error message
 #    mgr_start=DateField("Manager's Start Date:  yyyy-mm-dd",validators=[Regexp(regex)])
 #    mgr_start = DateField("Manager's Start Date")
@@ -119,3 +131,17 @@ class DeptForm(DeptUpdateForm):
         if dept:
             raise ValidationError('That department number is taken. Please choose a different one.')
 
+class EmployeeUpdateForm(FlaskForm):
+
+    pnumber = SelectField("Project number", choices = pnumslist)
+    emp_ssn = SelectField("Employee's SSN", choices = essnchoices)
+    submit = SubmitField('Update this Employee')
+
+
+
+class EmplForm(EmplUpdateForm):
+
+    pnumber = SelectField("Project number", choices = pnumslist)
+    emp_ssn = SelectField("Employee's SSN", choices = essnchoices)
+    hours = IntegerField('Number of hours', validators=[DataRequired()])
+    submit = SubmitField('Assign this Employee')

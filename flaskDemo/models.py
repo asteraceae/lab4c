@@ -36,16 +36,29 @@ class Post(db.Model):
          return f"Post('{self.title}', '{self.date_posted}')"
 
 
-
-
-
-
 class Dependent(db.Model):
     __table__ = db.Model.metadata.tables['dependent']
-    
+
 class Department(db.Model):
     __table__ = db.Model.metadata.tables['department']
+class Dept_Locations(db.Model):
+    __table__ = db.Model.metadata.tables['dept_locations']
 
+class Employee(db.Model):
+    __table__ = db.Model.metadata.tables['employee']
+class Project(db.Model):
+    __table__ = db.Model.metadata.tables['project']
+class Works_On(db.Model):
+    __table__ = db.Model.metadata.tables['works_on']
+
+def getEmployee(columns=None):
+    u = Employee.query
+    if columns:
+        u = u.options(orm.load_only(*columns))
+    return u
+
+def getEmployeeFactory(columns=None):
+    return partial(getEmployee, columns=columns)
 # used for query_factory
 def getDepartment(columns=None):
     u = Department.query
@@ -56,16 +69,11 @@ def getDepartment(columns=None):
 def getDepartmentFactory(columns=None):
     return partial(getDepartment, columns=columns)
 
-class Dept_Locations(db.Model):
-    __table__ = db.Model.metadata.tables['dept_locations']
-    
-class Employee(db.Model):
-    __table__ = db.Model.metadata.tables['employee']
-class Project(db.Model):
-    __table__ = db.Model.metadata.tables['project']
-class Works_On(db.Model):
-    __table__ = db.Model.metadata.tables['works_on']
+def getProject(columns=None):
+    u = Project.query
+    if columns:
+        u = u.options(orm.load_only(*columns))
+    return u
 
-    
-
-  
+def getProjectFactory(columns=None):
+    return partial(getProject, columns=columns)
