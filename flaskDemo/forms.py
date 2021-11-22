@@ -30,8 +30,8 @@ pnums = Project.query.with_entities(Project.pnumber).distinct()
 pnumslist = []
 for row in pnums:
     rowDict=row._asdict()
-    pnumslist.append(row)
-pnumschoices = [(row['pnumber']) for row in pnumslist]
+    pnumslist.append(rowDict)
+pnumschoices = [(row['pnumber'], row['pnumber']) for row in pnumslist]
 
 regex1='^((((19|20)(([02468][048])|([13579][26]))-02-29))|((20[0-9][0-9])|(19[0-9][0-9]))-((((0[1-9])'
 regex2='|(1[0-2]))-((0[1-9])|(1\d)|(2[0-8])))|((((0[13578])|(1[02]))-31)|(((0[1,3-9])|(1[0-2]))-(29|30)))))$'
