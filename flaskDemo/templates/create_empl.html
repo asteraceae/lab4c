@@ -7,59 +7,47 @@
             <legend class="border-bottom mb-4">{{ legend }}</legend>
 			{% if legend != "Update Department" %}
             <div class="form-group">
-                {{ form.dnumber.label(class="form-control-label") }}
-                {% if form.dnumber.errors %}
-                    {{ form.dnumber(class="form-control form-control-lg is-invalid") }}
+                {{ form.pnumber.label(class="form-control-label") }}
+                {% if form.pnumber.errors %}
+                    {{ form.pnumber(class="form-control form-control-lg is-invalid") }}
                     <div class="invalid-feedback">
-                        {% for error in form.dnumber.errors %}
+                        {% for error in form.pnumber.errors %}
                             <span>{{ error }}</span>
                         {% endfor %}
                     </div>
                 {% else %}
-                    {{ form.dnumber(class="form-control form-control-lg") }}
+                    {{ form.pnumber(class="form-control form-control-lg") }}
                 {% endif %}
             </div>
 			{% endif %}
 
             <div class="form-group">
-                {{ form.dname.label(class="form-control-label") }}
-                {% if form.dname.errors %}
-                    {{ form.dname(class="form-control form-control-lg is-invalid") }}
+                {{ form.hours.label(class="form-control-label") }}
+                {% if form.hours.errors %}
+                    {{ form.hours(class="form-control form-control-lg is-invalid") }}
                     <div class="invalid-feedback">
-                        {% for error in form.dname.errors %}
+                        {% for error in form.hours.errors %}
                             <span>{{ error }}</span>
                         {% endfor %}
                     </div>
                 {% else %}
-                    {{ form.dname(class="form-control form-control-lg") }}
+                    {{ form.hours(class="form-control form-control-lg") }}
                 {% endif %}
             </div>
 			<div class="form-group">
-                {{ form.mgr_ssn.label(class="form-control-label") }}
-                {% if form.mgr_ssn.errors %}
-                    {{ form.mgr_ssn(class="form-control form-control-lg is-invalid") }}
+                {{ form.emp_ssn.label(class="form-control-label") }}
+                {% if form.emp_ssn.errors %}
+                    {{ form.emp_ssn(class="form-control form-control-lg is-invalid") }}
                     <div class="invalid-feedback">
-                        {% for error in form.mgr_ssn.errors %}
+                        {% for error in form.emp_ssn.errors %}
                             <span>{{ error }}</span>
                         {% endfor %}
                     </div>
                 {% else %}
-                    {{ form.mgr_ssn(class="form-control form-control-lg") }}
+                    {{ form.emp_ssn(class="form-control form-control-lg") }}
                 {% endif %}
             </div>
-			<div class="form-group">
-                {{ form.mgr_start.label(class="form-control-label") }}
-                {% if form.mgr_start.errors %}
-                    {{ form.mgr_start(class="form-control form-control-lg is-invalid") }}
-                    <div class="invalid-feedback">
-                        {% for error in form.mgr_start.errors %}
-                            <span>{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                {% else %}
-                    {{ form.mgr_start(class="form-control form-control-lg") }}
-                {% endif %}
-            </div>
+		
         </fieldset>
         <div class="form-group">
             {{ form.submit(class="btn btn-outline-info") }}
