@@ -5,7 +5,7 @@ from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextA
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError,Regexp
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
 from flaskDemo import db
-import flaskDemo.models
+from flaskDemo.models import User, Post, Department, Dept_Locations, Employee, Project, Works_On, Dependent
 from wtforms.fields.html5 import DateField
 
 
