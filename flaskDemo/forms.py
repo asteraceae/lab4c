@@ -139,7 +139,7 @@ class EmployeeUpdateForm(FlaskForm):
 
 
 
-class EmplForm(EmplUpdateForm):
+class EmplForm(EmployeeUpdateForm):
 
     pnumber = SelectField("Project number", choices = pnumslist)
     emp_ssn = SelectField("Employee's SSN", choices = essnchoices)
