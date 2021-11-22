@@ -166,7 +166,7 @@ def delete_dept(dnumber):
 def new_empl_assign():
     form = EmplForm()
     if form.validate_on_submit():
-        empl = (pnumber = form.pnumber.data, emp_ssn = form.emp_ssn.data, hours = form.hours.data )
+        empl = Works_On(pno = form.pnumber.data, essn = form.emp_ssn.data, hours = form.hours.data)
         db.session.add(empl)
         db.session.commit()
         flash('You have added a new employee assignment!', 'success')
