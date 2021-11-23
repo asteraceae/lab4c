@@ -179,8 +179,8 @@ def new_empl_assign():
 def remove_empl_assign():
     form = removeEmplForm()
     if form.validate_on_submit():
-        empl = Works_On(pno = form.pnumber.data, essn = form.emp_ssn.data, hours = form.hours.data)
-        db.session.add(empl)
+        empl = Works_On.query.filter_by(essn = form.essn.data, pno = form.pno.data).first()
+        db.session.delete(empl)
         db.session.commit()
         flash('You have added a new employee assignment!', 'success')
         return redirect(url_for('home'))

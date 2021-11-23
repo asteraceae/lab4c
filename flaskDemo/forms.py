@@ -146,6 +146,6 @@ class EmplForm(EmployeeUpdateForm):
     submit = SubmitField('Assign this Employee')
 
 class removeEmplForm(EmployeeUpdateForm):
-    pnumber = SelectField("Project number", coerce = int, choices = pnumschoices)
-    emp_ssn = SelectField("Employee's SSN", choices = essnchoices)
+    pno = SelectField("Project number", coerce = int, choices = pnumschoices)
+    essn = SelectField("Employee's SSN", choices = essnchoices)
     submit = SubmitField('Remove this Employee')
