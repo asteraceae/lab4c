@@ -170,7 +170,7 @@ def new_empl_assign(pnumber):
         db.session.add(empl)
         db.session.commit()
         flash('You have added a new employee assignment!', 'success')
-        return redirect(url_for('dept'))
+        return redirect(url_for('home'))
     return render_template('create_empl.html', title='New Employee Assignment',
                            form = form, legend='New Employee Assignment')
 
