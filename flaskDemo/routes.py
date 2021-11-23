@@ -121,7 +121,8 @@ def new_dept():
 @login_required
 def dept(dnumber):
     dept = Department.query.get_or_404(dnumber)
-    return render_template('dept.html', title=dept.dname, dept=dept, now=datetime.utcnow())
+    projs = Project.query.get_or_404(dnumber)
+    return render_template('dept.html', title=dept.dname, dept=dept, projs = projs, now=datetime.utcnow())
 
 
 @app.route("/dept/<dnumber>/update", methods=['GET', 'POST'])
@@ -163,23 +164,23 @@ def delete_dept(dnumber):
 
 @app.route("/empl/new_assignment", methods=['GET', 'POST'])
 @login_required
-def new_empl_assign():
+def new_empl_assign(pno):
     form = EmplForm()
     if form.validate_on_submit():
-        empl = Works_On(pno = form.pnumber.data, essn = form.emp_ssn.data, hours = form.hours.data)
+        empl = Works_On(pno = pno, essn = form.emp_ssn.data, hours = form.hours.data)
         db.session.add(empl)
         db.session.commit()
         flash('You have added a new employee assignment!', 'success')
-        return redirect(url_for('home'))
+        return redirect(url_for('dept'))
     return render_template('create_empl.html', title='New Employee Assignment',
                            form = form, legend='New Employee Assignment')
 
 @app.route("/empl/remove", methods=['GET', 'POST'])
 @login_required
-def remove_empl_assign():
+def remove_empl_assign(pno):
     form = removeEmplForm()
     if form.validate_on_submit():
-        empl = Works_On.query.filter_by(essn = form.essn.data, pno = form.pno.data).first()
+        empl = Works_On.query.filter_by(essn = form.essn.data, pno = pno).first()
         db.session.delete(empl)
         db.session.commit()
         flash('You have removed an employee assignment!', 'danger')

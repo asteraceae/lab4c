@@ -139,13 +139,10 @@ class EmployeeUpdateForm(FlaskForm):
     submit = SubmitField('Update this Employee')
 
 class EmplForm(EmployeeUpdateForm):
-
-    pnumber = SelectField("Project number", coerce = int, choices = pnumschoices)
     emp_ssn = SelectField("Employee's SSN", choices = essnchoices)
     hours = IntegerField('Number of hours', validators=[DataRequired()])
     submit = SubmitField('Assign this Employee')
 
 class removeEmplForm(EmployeeUpdateForm):
-    pno = SelectField("Project number", coerce = int, choices = pnumschoices)
     essn = SelectField("Employee's SSN", choices = essnchoices)
     submit = SubmitField('Remove this Employee')
