@@ -25,6 +25,7 @@ for row in essns:
     rowDict=row._asdict()
     essnlist.append(rowDict)
 essnchoices = [(row['ssn'],row['ssn']) for row in essnlist]
+print(essnchoices)
 
 pnums = Project.query.with_entities(Project.pnumber).distinct()
 pnumslist = []
@@ -133,11 +134,9 @@ class DeptForm(DeptUpdateForm):
 
 class EmployeeUpdateForm(FlaskForm):
 
-    pnumber = SelectField("Project number", choices = pnumslist)
-    emp_ssn = SelectField("Employee's SSN", choices = essnchoices)
+    #pnumber = SelectField("Project number", choices = pnumslist)
+    #emp_ssn = SelectField("Employee's SSN", choices = essnchoices)
     submit = SubmitField('Update this Employee')
-
-
 
 class EmplForm(EmployeeUpdateForm):
 
