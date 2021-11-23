@@ -6,19 +6,6 @@
         <fieldset class="form-group">
             <legend class="border-bottom mb-4">{{ legend }}</legend>
 			{% if legend != "Update Works_On" %}
-            <div class="form-group">
-                {{ form.pnumber.label(class="form-control-label") }}
-                {% if form.pnumber.errors %}
-                    {{ form.pnumber(class="form-control form-control-lg is-invalid") }}
-                    <div class="invalid-feedback">
-                        {% for error in form.pnumber.errors %}
-                            <span>{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                {% else %}
-                    {{ form.pnumber(class="form-control form-control-lg") }}
-                {% endif %}
-            </div>
 			{% endif %}
 
             <div class="form-group">
