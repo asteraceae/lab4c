@@ -8,7 +8,7 @@ from flaskDemo.models import User, Post,Department, Dependent, Dept_Locations, E
 from flask_login import login_user, current_user, logout_user, login_required
 from datetime import datetime
 
-triple = Employee.query.join(Employee.dno == Project.dnum && Project.pnumber == Works_On.pno)
+triple = Employee.query.join(Employee.dno == Project.dnum, Project.pnumber == Works_On.pno)
           .add_columns(Employee.ssn, Employee.dno, Employee.fname, Employee.lname, Project.plocation, Project.pname, Project.dnum, Project.pnumber, Works_On.pno, Works_On.essn, Works_On.hours)
 
 
