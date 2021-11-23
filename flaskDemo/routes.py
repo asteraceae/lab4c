@@ -132,6 +132,7 @@ def dept(dnumber):
         for y in empls:
             minilist.append(y)
         projlist.extend([x, minilist])
+    print(projlist)
 
     return render_template('dept.html', title=dept.dname, dept=dept, projlist = projlist, now = datetime.utcnow())
 
