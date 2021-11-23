@@ -140,7 +140,7 @@ class EmployeeUpdateForm(FlaskForm):
 
 class EmplForm(EmployeeUpdateForm):
 
-    pnumber = SelectField("Project number", choices = pnumslist)
+    pnumber = SelectField("Project number", choices = pnumschoices)
     emp_ssn = SelectField("Employee's SSN", choices = essnchoices)
     hours = IntegerField('Number of hours', validators=[DataRequired()])
     submit = SubmitField('Assign this Employee')
