@@ -8,8 +8,6 @@ from flaskDemo.models import User, Post,Department, Dependent, Dept_Locations, E
 from flask_login import login_user, current_user, logout_user, login_required
 from datetime import datetime
 
-projs = Project.query.filter_by(dnum = dnumber).all()
-print(projs)
 @app.route("/")
 @app.route("/home")
 def home():
@@ -167,7 +165,7 @@ def delete_dept(dnumber):
 @app.route("/empl/new_assignment", methods=['GET', 'POST'])
 @login_required
 def new_empl_assign(pno):
-    form = EmplForm(pno)
+    form = EmplForm()
     if form.validate_on_submit():
         empl = Works_On(pno = pno, essn = form.emp_ssn.data, hours = form.hours.data)
         db.session.add(empl)
@@ -180,7 +178,7 @@ def new_empl_assign(pno):
 @app.route("/empl/remove", methods=['GET', 'POST'])
 @login_required
 def remove_empl_assign(pno):
-    form = removeEmplForm(pno)
+    form = removeEmplForm()
     if form.validate_on_submit():
         empl = Works_On.query.filter_by(essn = form.essn.data, pno = pno).first()
         db.session.delete(empl)

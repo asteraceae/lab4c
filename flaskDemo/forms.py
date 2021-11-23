@@ -138,15 +138,15 @@ class EmployeeUpdateForm(FlaskForm):
     #emp_ssn = SelectField("Employee's SSN", choices = essnchoices)
     submit = SubmitField('Update this Employee')
 
-class EmplForm(EmployeeUpdateForm, pno):
+class EmplForm(EmployeeUpdateForm):
     emp_ssn = SelectField("Employee's SSN", choices = essnchoices)
     hours = IntegerField('Number of hours', validators=[DataRequired()])
     submit = SubmitField('Assign this Employee')
 
-    def validate_assignment(self, essn, pno):    #because dnumber is primary key and should be unique
-         assign = Department.query.filter_by(pnumber = pno).first()
+    #def validate_assignment(self, essn):    #because dnumber is primary key and should be unique
+        #assign = Department.query.filter_by().first()
          #if employee in assign raise validation errpr
 
-class removeEmplForm(EmployeeUpdateForm, pno):
+class removeEmplForm(EmployeeUpdateForm):
     essn = SelectField("Employee's SSN", choices = essnchoices)
     submit = SubmitField('Remove this Employee')
