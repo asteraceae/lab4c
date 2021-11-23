@@ -183,8 +183,8 @@ def new_empl_assign(pnumber):
         db.session.add(empl)
         db.session.commit()
         flash('You have added a new employee assignment!', 'success')
-        return redirect(url_for('home'))
-    dept(pnumber)
+        p = Project.query.filter_by(pnumber = pnumber)
+        return redirect(url_for('dept', dnumber=p.dnumber))
     return render_template('create_empl.html', title='New Employee Assignment',
                            form = form, legend='New Employee Assignment')
 
@@ -197,7 +197,7 @@ def remove_empl_assign(pnumber):
         db.session.delete(empl)
         db.session.commit()
         flash('You have removed an employee assignment!', 'danger')
-        return redirect(url_for('home'))
-    dept(pnumber)
+        p = Project.query.filter_by(pnumber = pnumber)
+        return redirect(url_for('dept', dnumber=p.dnumber))
     return render_template('reassign_empl.html', title='Remove Employee Assignment',
                            form = form, legend='Remove Employee Assignment')
