@@ -182,7 +182,7 @@ def remove_empl_assign():
         empl = Works_On.query.filter_by(essn = form.essn.data, pno = form.pno.data).first()
         db.session.delete(empl)
         db.session.commit()
-        flash('You have removed an employee assignment!', 'error')
+        flash('You have removed an employee assignment!', 'danger')
         return redirect(url_for('home'))
     return render_template('reassign_empl.html', title='Remove Employee Assignment',
                            form = form, legend='Remove Employee Assignment')
