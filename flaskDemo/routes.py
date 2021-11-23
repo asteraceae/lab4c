@@ -163,7 +163,7 @@ def delete_dept(dnumber):
 
 @app.route("/empl/new_assignment", methods=['GET', 'POST'])
 @login_required
-def new_empl_assign(pno):
+def new_empl_assign(pnumber):
     form = EmplForm()
     if form.validate_on_submit():
         empl = Works_On(pno = pno, essn = form.emp_ssn.data, hours = form.hours.data)
@@ -176,7 +176,7 @@ def new_empl_assign(pno):
 
 @app.route("/empl/remove", methods=['GET', 'POST'])
 @login_required
-def remove_empl_assign(pno):
+def remove_empl_assign(pnumber):
     form = removeEmplForm()
     if form.validate_on_submit():
         empl = Works_On.query.filter_by(essn = form.essn.data, pno = pno).first()
