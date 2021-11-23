@@ -6,12 +6,14 @@
       <div class="article-metadata">
         <a class="mr-2" href="#">{{ dept.dname }}</a>
         <small class="text-muted">{{now.strftime('%A %B, %d %Y %H:%M:%S')}}</small>
-
+        <div class="blah some text">
+          <p class='text-muted'>You can put any information here you'd like.</p>
+        </div>
           <div>
             <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{ url_for('update_dept', dnumber=dept.dnumber) }}">Update</a>
             <button type="button" class="btn btn-danger btn-sm m-1" data-toggle="modal" data-target="#deleteModal">Delete</button>
           </div>
- 
+
       </div>
 
     </div>
