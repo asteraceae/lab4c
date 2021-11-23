@@ -133,7 +133,6 @@ def dept(dnumber):
             minilist.append(y)
         projlist.extend([[x, minilist]])
     print(projlist)
-
     return render_template('dept.html', title=dept.dname, dept=dept, projlist = projlist, now = datetime.utcnow())
 
 
@@ -185,6 +184,7 @@ def new_empl_assign(pnumber):
         db.session.commit()
         flash('You have added a new employee assignment!', 'success')
         return redirect(url_for('home'))
+    dept(pnumber)
     return render_template('create_empl.html', title='New Employee Assignment',
                            form = form, legend='New Employee Assignment')
 
@@ -198,5 +198,6 @@ def remove_empl_assign(pnumber):
         db.session.commit()
         flash('You have removed an employee assignment!', 'danger')
         return redirect(url_for('home'))
+    dept(pnumber)
     return render_template('reassign_empl.html', title='Remove Employee Assignment',
                            form = form, legend='Remove Employee Assignment')
