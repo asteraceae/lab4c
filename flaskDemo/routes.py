@@ -197,7 +197,8 @@ def remove_empl_assign(pnumber):
         db.session.delete(empl)
         db.session.commit()
         flash('You have removed an employee assignment!', 'danger')
-        p = Project.query.filter_by(pnumber = pnumber).first()
+        p = Project.query.filter_by(pnumber = pnumber).all()
+        print(p)
         return redirect(url_for('dept', dnumber=p.dnum))
     return render_template('reassign_empl.html', title='Remove Employee Assignment',
                            form = form, legend='Remove Employee Assignment')
