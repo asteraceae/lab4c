@@ -3,7 +3,7 @@ import secrets
 from PIL import Image
 from flask import render_template, url_for, flash, redirect, request, abort
 from flaskDemo import app, db, bcrypt
-from flaskDemo.forms import RegistrationForm, LoginForm, UpdateAccountForm, PostForm, DeptForm,DeptUpdateForm, EmplForm, EmployeeUpdateForm
+from flaskDemo.forms import RegistrationForm, LoginForm, UpdateAccountForm, PostForm, DeptForm,DeptUpdateForm, EmplForm, EmployeeUpdateForm, removeEmplForm
 from flaskDemo.models import User, Post,Department, Dependent, Dept_Locations, Employee, Project, Works_On
 from flask_login import login_user, current_user, logout_user, login_required
 from datetime import datetime
@@ -173,3 +173,16 @@ def new_empl_assign():
         return redirect(url_for('home'))
     return render_template('create_empl.html', title='New Employee Assignment',
                            form = form, legend='New Employee Assignment')
+
+@app.route("/empl/remove", methods=['GET', 'POST'])
+@login_required
+def remove_empl_assign():
+    form = removeEmplForm()
+    if form.validate_on_submit():
+        empl = Works_On(pno = form.pnumber.data, essn = form.emp_ssn.data, hours = form.hours.data)
+        db.session.add(empl)
+        db.session.commit()
+        flash('You have added a new employee assignment!', 'success')
+        return redirect(url_for('home'))
+    return render_template('reassign_empl.html', title='Remove Employee Assignment',
+                           form = form, legend='Remove Employee Assignment')
