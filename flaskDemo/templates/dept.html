@@ -44,7 +44,8 @@
       <div class="article-metadata">
         <a class="mr-2">Project: {{ proj.pname }}<br></a>
         <a class="mr-2">Project number: {{ proj.pnumber }}<br></a>
-          <a class="mr-2">Employees: {{ proj.plocation }}<br></a>
+          <a class="mr-2">Location: {{ proj.plocation }}<br></a>
+          <a class="mr-2">Employee: {{ proj.plocation }}<br></a>
             <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{ url_for('new_empl_assign', pnumber=proj.pnumber) }}">Add Employee Assignment</a>
             <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{ url_for('remove_empl_assign', pnumber=proj.pnumber) }}">Remove Employee Assignment</a>
           </div>
