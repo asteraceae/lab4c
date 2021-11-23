@@ -42,7 +42,8 @@
   <article class="media content-section">
     <div class="media-body">
       <div class="article-metadata">
-        <a class="mr-2" href="#">{{ proj.pname }}</a>
+        <a class="mr-2">Project: {{ proj.pname }}</a>
+        <a class="mr-2">Project: {{ proj.pnumber }}</a>
             <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{ url_for('new_empl_assign', pnumber=proj.pnumber) }}">Add Employee Assignment</a>
             <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{ url_for('remove_empl_assign', pnumber=proj.pnumber) }}">Remove Employee Assignment</a>
           </div>
