@@ -121,7 +121,6 @@ def new_dept():
 def dept(dnumber):
     dept = Department.query.get_or_404(dnumber)
     projs = Project.query.filter_by(dnum = dnumber).all()
-    print(projs)
     return render_template('dept.html', title=dept.dname, dept=dept, projs = projs, now=datetime.utcnow())
 
 
