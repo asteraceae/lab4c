@@ -8,7 +8,8 @@ from flaskDemo.models import User, Post,Department, Dependent, Dept_Locations, E
 from flask_login import login_user, current_user, logout_user, login_required
 from datetime import datetime
 
-
+projs = Project.query.filter_by(dnum = dnumber).all()
+print(projs)
 @app.route("/")
 @app.route("/home")
 def home():
@@ -121,7 +122,8 @@ def new_dept():
 @login_required
 def dept(dnumber):
     dept = Department.query.get_or_404(dnumber)
-    projs = Project.query.get_or_404(dnumber)
+    projs = Project.query.filter_by(dnum = dnumber).all()
+    print(projs)
     return render_template('dept.html', title=dept.dname, dept=dept, projs = projs, now=datetime.utcnow())
 
 
@@ -165,7 +167,7 @@ def delete_dept(dnumber):
 @app.route("/empl/new_assignment", methods=['GET', 'POST'])
 @login_required
 def new_empl_assign(pno):
-    form = EmplForm()
+    form = EmplForm(pno)
     if form.validate_on_submit():
         empl = Works_On(pno = pno, essn = form.emp_ssn.data, hours = form.hours.data)
         db.session.add(empl)
@@ -178,7 +180,7 @@ def new_empl_assign(pno):
 @app.route("/empl/remove", methods=['GET', 'POST'])
 @login_required
 def remove_empl_assign(pno):
-    form = removeEmplForm()
+    form = removeEmplForm(pno)
     if form.validate_on_submit():
         empl = Works_On.query.filter_by(essn = form.essn.data, pno = pno).first()
         db.session.delete(empl)
