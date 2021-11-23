@@ -8,6 +8,10 @@ from flaskDemo.models import User, Post,Department, Dependent, Dept_Locations, E
 from flask_login import login_user, current_user, logout_user, login_required
 from datetime import datetime
 
+triple = Employee.query.join(Employee.dno == Project.dnum && Project.pnumber == Works_On.pno)
+          .add_columns(Employee.ssn, Employee.dno, Employee.fname, Employee.lname, Project.plocation, Project.pname, Project.dnum, Project.pnumber, Works_On.pno, Works_On.essn, Works_On.hours)
+
+
 @app.route("/")
 @app.route("/home")
 def home():
@@ -121,10 +125,17 @@ def new_dept():
 def dept(dnumber):
     dept = Department.query.get_or_404(dnumber)
     projs = Project.query.filter_by(dnum = dnumber).all()
-    empls = Employee.query.filter_by(dno = dnumber)
-    return render_template('dept.html', title=dept.dname, dept=dept, projs=projs, empls=empls, now=datetime.utcnow())
+    projlist = []
+    for x in projs:
+        empls = triple.filter_by(Employee.dno = dnumber, Works_On.essn = Employee.ssn).all()
+        minilist = []
+        for y in empls:
+            minilist.append(y)
+        projlist.extend([x, minilist])
 
-    
+    return render_template('dept.html', title=dept.dname, dept=dept, projlist = projlist, now = datetime.utcnow())
+
+
 
 @app.route("/dept/<dnumber>/update", methods=['GET', 'POST'])
 @login_required

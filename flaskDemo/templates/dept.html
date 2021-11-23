@@ -38,19 +38,19 @@
   </div>
 
   <!-- Projects -->
-    {% for proj in projs %}
+    {% for p in projlist %}
   <article class="media content-section">
     <div class="media-body">
       <div class="article-metadata">
-        <a class="mr-2">Project: {{ proj.pname }}<br></a>
-        <a class="mr-2">Project number: {{ proj.pnumber }}<br></a>
-          <a class="mr-2">Location: {{ proj.plocation }}<br></a>
-            <a class="mr-2">Employee: <br></a>
-          {% for empl in empls %}
+        <a class="mr-2">Project: {{ p[0].pname }}<br></a>
+        <a class="mr-2">Project number: {{ p[0].pnumber }}<br></a>
+          <a class="mr-2">Location: {{ p[0].plocation }}<br></a>
+            <a class="mr-2">Employee(s): <br></a>
+          {% for empl in p[1] %}
           <a class="mr-2">{{ empl.fname }} {{ empl.lname }}<br></a>
             {% endfor %}
-            <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{ url_for('new_empl_assign', pnumber=proj.pnumber) }}">Add Employee Assignment</a>
-            <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{ url_for('remove_empl_assign', pnumber=proj.pnumber) }}">Remove Employee Assignment</a>
+            <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{ url_for('new_empl_assign', pnumber=p[0].pnumber) }}">Add Employee Assignment</a>
+            <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{ url_for('remove_empl_assign', pnumber=p[0].pnumber) }}">Remove Employee Assignment</a>
           </div>
       </div>
   </article>
