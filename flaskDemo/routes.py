@@ -127,7 +127,7 @@ def dept(dnumber):
     projs = Project.query.filter_by(dnum = dnumber).all()
     projlist = []
     for x in projs:
-        empls = triple.filter(Employee.dno == dnumber).filter(x.pnum == Works_On.pno).filter(Works_On.essn == Employee.ssn).all()
+        empls = triple.filter(Employee.dno == dnumber).filter(x.pnumber == Works_On.pno).filter(Works_On.essn == Employee.ssn).all()
         minilist = []
         for y in empls:
             minilist.append(y)
