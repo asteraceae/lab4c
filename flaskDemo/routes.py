@@ -161,7 +161,7 @@ def delete_dept(dnumber):
     return redirect(url_for('home'))
 
 
-@app.route("/empl/new_assignment", methods=['GET', 'POST'])
+@app.route("/empl/<pnumber>/new_assignment", methods=['GET', 'POST'])
 @login_required
 def new_empl_assign(pnumber):
     form = EmplForm()
@@ -174,7 +174,7 @@ def new_empl_assign(pnumber):
     return render_template('create_empl.html', title='New Employee Assignment',
                            form = form, legend='New Employee Assignment')
 
-@app.route("/empl/remove", methods=['GET', 'POST'])
+@app.route("/empl/<pnumber>/remove", methods=['GET', 'POST'])
 @login_required
 def remove_empl_assign(pnumber):
     form = removeEmplForm()
