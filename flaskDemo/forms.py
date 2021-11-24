@@ -50,10 +50,10 @@ def Choices_add(pnumber):
     global choices_add
     choices_add = []
     for x in all:
-        print(x)
         if x not in empls:
             string = x.fname + " " + x.lname
             choices_add.append(string)
+            print("this is the string" + string)
 
 def Choices_remove(pnumber):
     all = triple.filter(Employee.dno == dnumber).all()
