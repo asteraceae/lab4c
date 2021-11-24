@@ -142,7 +142,7 @@ class EmployeeUpdateForm(FlaskForm):
     #emp_ssn = SelectField("Employee's SSN", choices = essnchoices)
     submit = SubmitField('Update this Employee')
 
-class Choices_add(pnumber):
+def Choices_add(pnumber):
     empls = triple.filter(Works_On.pno == pnumber).all()
     choices_add = []
     for x in empls:
