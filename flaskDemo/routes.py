@@ -179,7 +179,7 @@ def new_empl_assign(pnumber):
     Choices_add(pnumber)
     form = EmplForm()
     if form.validate_on_submit():
-        essn = triple.filter_by(Employee.fname = form.essn.data.split[0]).first()
+        essn = triple.filter_by(Employee.fname == form.essn.data.split[0]).first()
         empl = Works_On(pno = pnumber, essn = essn.ssn, hours = form.hours.data)
         db.session.add(empl)
         db.session.commit()
