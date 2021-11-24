@@ -180,8 +180,11 @@ def new_empl_assign(pnumber):
     Choices_add(pnumber)
     form = EmplForm()
     if form.validate_on_submit():
-        essn = triple.filter_by(Employee.fname == form.essn.data[0].split[0]).first()
-        print(essn)
+        name = str(form.essn.data)
+        name = name.split()
+        print(name)
+        name = name[0]
+        essn = triple.filter_by(Employee.fname == name).first()
         empl = Works_On(pno = pnumber, essn = essn.ssn, hours = form.hours.data)
         db.session.add(empl)
         db.session.commit()
@@ -197,8 +200,11 @@ def remove_empl_assign(pnumber):
     Choices_remove(pnumber)
     form = removeEmplForm()
     if form.validate_on_submit():
-        print(form.essn.data)
-        essn = triple.filter_by(Employee.fname == form.essn.data[0].split[0]).first()
+        name = str(form.essn.data)
+        name = name.split()
+        print(name)
+        name = name[0]
+        essn = triple.filter_by(Employee.fname == name).first()
         print(essn)
         empl = Works_On.query.filter_by(essn = essn.ssn, pno = pnumber).first()
         db.session.delete(empl)
