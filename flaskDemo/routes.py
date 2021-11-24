@@ -176,9 +176,11 @@ def delete_dept(dnumber):
 @app.route("/empl/<pnumber>/new_assignment", methods=['GET', 'POST'])
 @login_required
 def new_empl_assign(pnumber):
+    Choices_add(pnumber)
     form = EmplForm()
     if form.validate_on_submit():
-        empl = Works_On(pno = pnumber, essn = form.emp_ssn.data, hours = form.hours.data)
+        essn = triple.filter_by(Employee.fname = form.essn.data.split[0]).first()
+        empl = Works_On(pno = pnumber, essn = essn.ssn, hours = form.hours.data)
         db.session.add(empl)
         db.session.commit()
         flash('You have added a new employee assignment!', 'success')
@@ -190,6 +192,7 @@ def new_empl_assign(pnumber):
 @app.route("/empl/<pnumber>/remove", methods=['GET', 'POST'])
 @login_required
 def remove_empl_assign(pnumber):
+    Choices_add(pnumber)
     form = removeEmplForm()
     if form.validate_on_submit():
         empl = Works_On.query.filter_by(essn = form.essn.data, pno = pnumber).first()

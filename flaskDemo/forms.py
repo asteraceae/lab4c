@@ -33,6 +33,10 @@ for row in pnums:
     pnumslist.append(rowDict)
 pnumschoices = [(row['pnumber'], row['pnumber']) for row in pnumslist]
 
+choices_add = []
+choices_remove = []
+
+triple = Employee.query.join(Works_On).join(Project).add_columns(Employee.ssn, Employee.dno, Employee.fname, Employee.lname, Project.plocation, Project.pname, Project.dnum, Project.pnumber, Works_On.pno, Works_On.essn, Works_On.hours)
 
 regex1='^((((19|20)(([02468][048])|([13579][26]))-02-29))|((20[0-9][0-9])|(19[0-9][0-9]))-((((0[1-9])'
 regex2='|(1[0-2]))-((0[1-9])|(1\d)|(2[0-8])))|((((0[13578])|(1[02]))-31)|(((0[1,3-9])|(1[0-2]))-(29|30)))))$'
@@ -138,8 +142,16 @@ class EmployeeUpdateForm(FlaskForm):
     #emp_ssn = SelectField("Employee's SSN", choices = essnchoices)
     submit = SubmitField('Update this Employee')
 
+class Choices_add(pnumber):
+    empls = triple.filter(Works_On.pno == pnumber).all()
+    choices_add = []
+    for x in empls:
+        string = empl.fname + " " + lname
+        choices_add.append(empl.lname)
+
+
 class EmplForm(EmployeeUpdateForm):
-    emp_ssn = SelectField("Employee's SSN", choices = essnchoices)
+    essn = SelectField("Employee's Name", choices = choices_add)
     hours = IntegerField('Number of hours', validators=[DataRequired()])
     submit = SubmitField('Assign this Employee')
 
@@ -148,5 +160,5 @@ class EmplForm(EmployeeUpdateForm):
          #if employee in assign raise validation errpr
 
 class removeEmplForm(EmployeeUpdateForm):
-    essn = SelectField("Employee's SSN", choices = essnchoices)
+    essn = SelectField("Employee's SSN", choices = choices_add)
     submit = SubmitField('Remove this Employee')
