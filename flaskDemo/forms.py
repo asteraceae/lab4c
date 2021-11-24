@@ -43,21 +43,23 @@ regex=regex1 + regex2
 
 
 def Choices_add(pnumber):
+    choices_add.clear()
     dnumber = Project.query.filter_by(pnumber = pnumber).first()
     dnumber = dnumber.dnum
     all = Employee.query.filter(Employee.dno == dnumber).distinct().all()
     for x in all:
         string = x.fname + " " + x.lname
-    choices_add.append(string)
+        choices_add.append(string)
     print(choices_add)
 
 def Choices_remove(pnumber):
+    choices_add.clear()
     dnumber = Project.query.filter_by(pnumber = pnumber).first()
     dnumber = dnumber.dnum
     all = Employee.query.filter(Employee.dno == dnumber).distinct().all()
     for x in all:
         string = x.fname + " " + x.lname
-    choices_add.append(string)
+        choices_add.append(string)
     print(choices_add)
 
 class RegistrationForm(FlaskForm):
