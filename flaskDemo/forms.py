@@ -44,7 +44,8 @@ regex=regex1 + regex2
 
 def Choices_add(pnumber):
     empls = triple.filter(Works_On.pno == pnumber).all()
-    global choices_add = []
+    global choices_add
+    choices_add = []
     for x in empls:
         string = x.fname + " " + x.lname
         choices_add.append(string)
