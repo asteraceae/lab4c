@@ -176,7 +176,7 @@ class EmplForm(EmployeeUpdateForm):
         name = name[0]
         #now see if ssn exists in works on
         ssn = Employee.query.filter_by(fname = name).first()
-        print(ssn)
+        print(ssn.ssn)
         empl = Works_On.query.filter_by(essn = ssn.ssn, pno = pnumber_save).first()
         print("DEBUG\n")
         print(empl)
