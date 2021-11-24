@@ -43,27 +43,29 @@ regex=regex1 + regex2
 
 
 def Choices_add(pnumber):
-    all = triple.all()
+    dnumber = Project.query.filter_by(pnumber = pnumber).all()
+    dnumber = dnumber.dnum
+    all = triple.filter(Employee.dno == dnumber).all()
     empls = triple.filter(Works_On.pno == pnumber).all()
     global choices_add
     choices_add = []
-    for x in empls:
+    for x in all:
         print(x)
         if x not in empls:
             string = x.fname + " " + x.lname
             choices_add.append(string)
 
 def Choices_remove(pnumber):
-    all = triple.all()
+    all = triple.filter(Employee.dno == dnumber).all()
     empls = triple.filter(Works_On.pno == pnumber).all()
     global choices_add
     choices_add = []
-    for x in empls:
+    for x in all:
         print(x)
         if x in empls:
             string = x.fname + " " + x.lname
             choices_add.append(string)
-    print("debug " + choices_add)
+    print(choices_add)
 
 class RegistrationForm(FlaskForm):
     username = StringField('Username',
