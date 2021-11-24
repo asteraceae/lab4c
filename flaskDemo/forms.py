@@ -46,7 +46,8 @@ def Choices_add(pnumber):
     dnumber = Project.query.filter_by(pnumber = pnumber).first()
     dnumber = dnumber.dnum
     all = Employee.query.filter(Employee.dno == dnumber).distinct().all()
-    string = all.fname + " " + all.lname
+    for x in all:
+        string = x.fname + " " + x.lname
     choices_add.append(string)
     print(choices_add)
 
@@ -54,7 +55,8 @@ def Choices_remove(pnumber):
     dnumber = Project.query.filter_by(pnumber = pnumber).first()
     dnumber = dnumber.dnum
     all = Employee.query.filter(Employee.dno == dnumber).distinct().all()
-    string = all.fname + " " + all.lname
+    for x in all:
+        string = x.fname + " " + x.lname
     choices_add.append(string)
     print(choices_add)
 
