@@ -8,7 +8,7 @@ from flaskDemo.forms import *
 from flaskDemo.models import User, Post,Department, Dependent, Dept_Locations, Employee, Project, Works_On
 from flask_login import login_user, current_user, logout_user, login_required
 from datetime import datetime
-from sqlalchemy import func, select, column
+
 
 triple = Employee.query.join(Works_On).join(Project).add_columns(Employee.ssn, Employee.dno, Employee.fname, Employee.lname, Project.plocation, Project.pname, Project.dnum, Project.pnumber, Works_On.pno, Works_On.essn, Works_On.hours)
 
@@ -124,15 +124,20 @@ def new_dept():
 @app.route("/dept/<dnumber>")
 @login_required
 def dept(dnumber):
+    #get dept
     dept = Department.query.get_or_404(dnumber)
+    #get projects list that match department
     projs = Project.query.filter_by(dnum = dnumber).all()
     projlist = []
-    for x in projs:
-        empls = triple.filter(Works_On.pno == x.pnumber).all()
-        minilist = []
-        for y in empls:
-            minilist.append(y)
-        projlist.extend([[x, minilist]])
+    #iterate through all projects so that we can get the employees meant for each project
+    for proj in projs:
+        empls = triple.filter(Works_On.pno == proj.pnumber).all()
+        emplist = []
+        for emp in empls:
+            emplist.append(emp)
+        #a 3 dimensional list is probably not the best way
+        projlist.extend([[proj, emplist]])
+    print(projlist)
     return render_template('dept.html', title=dept.dname, dept=dept, projlist = projlist, now = datetime.utcnow())
 
 
@@ -142,7 +147,6 @@ def dept(dnumber):
 def update_dept(dnumber):
     dept = Department.query.get_or_404(dnumber)
     currentDept = dept.dname
-
     form = DeptUpdateForm()
     if form.validate_on_submit():          # notice we are are not passing the dnumber from the form
         if currentDept !=form.dname.data:
@@ -153,7 +157,6 @@ def update_dept(dnumber):
         flash('Your department has been updated!', 'success')
         return redirect(url_for('dept', dnumber=dnumber))
     elif request.method == 'GET':              # notice we are not passing the dnumber to the form
-
         form.dnumber.data = dept.dnumber
         form.dname.data = dept.dname
         form.mgr_ssn.data = dept.mgr_ssn
@@ -177,40 +180,44 @@ def delete_dept(dnumber):
 @app.route("/empl/<pnumber>/new_assignment", methods=['GET', 'POST'])
 @login_required
 def new_empl_assign(pnumber):
+    #function is in forms - but was struggling with adding the correct choices to the drop down box
     Choices_add(pnumber)
+    #form
     form = EmplForm()
     if form.validate_on_submit():
+        #get First Last, used first name to get the ssn so that works_on can be updated
         name = str(form.essn.data)
+            #splits string into list
         name = name.split()
-        print(name)
+            #use first element
         name = name[0]
+            #now query
         essn = Employee.query.filter_by(fname = name).first()
+            #add and commit
         empl = Works_On(pno = pnumber, essn = essn.ssn, hours = form.hours.data)
         db.session.add(empl)
         db.session.commit()
         flash('You have added a new employee assignment!', 'success')
-        p = Project.query.filter_by(pnumber = pnumber).first()
-        return redirect(url_for('dept', dnumber=p.dnum))
+        return redirect(url_for('home'))
     return render_template('create_empl.html', title='New Employee Assignment',
                            form = form, legend='New Employee Assignment')
 
 @app.route("/empl/<pnumber>/remove", methods=['GET', 'POST'])
 @login_required
 def remove_empl_assign(pnumber):
+    #function is in forms - but was struggling with adding the correct choices to the drop down box
     Choices_remove(pnumber)
     form = removeEmplForm()
     if form.validate_on_submit():
+        ##get First Last, used first name to get the ssn so that works_on can be updated
         name = str(form.essn.data)
         name = name.split()
-        print(name)
         name = name[0]
         essn = Employee.query.filter_by(fname = name).first()
-        print(essn)
         empl = Works_On.query.filter_by(essn = essn.ssn, pno = pnumber).first()
         db.session.delete(empl)
         db.session.commit()
         flash('You have removed an employee assignment!', 'danger')
-        p = Project.query.filter_by(pnumber = pnumber).first()
-        return redirect(url_for('dept', dnumber=p.dnum))
+        return redirect(url_for('home'))
     return render_template('reassign_empl.html', title='Remove Employee Assignment',
                            form = form, legend='Remove Employee Assignment')
