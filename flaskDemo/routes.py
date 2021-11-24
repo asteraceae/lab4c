@@ -184,7 +184,7 @@ def new_empl_assign(pnumber):
         name = name.split()
         print(name)
         name = name[0]
-        essn = triple.filter_by(fname = name).first()
+        essn = triple.filter(Employee.fname == name).first()
         empl = Works_On(pno = pnumber, essn = essn.ssn, hours = form.hours.data)
         db.session.add(empl)
         db.session.commit()
@@ -204,7 +204,7 @@ def remove_empl_assign(pnumber):
         name = name.split()
         print(name)
         name = name[0]
-        essn = triple.filter_by(fname = name).first()
+        essn = triple.filter(Employee.fname == name).first()
         print(essn)
         empl = Works_On.query.filter_by(essn = essn.ssn, pno = pnumber).first()
         db.session.delete(empl)
