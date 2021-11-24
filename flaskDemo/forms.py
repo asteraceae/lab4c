@@ -56,6 +56,8 @@ def Choices_add(pnumber):
             print("this is the string" + string)
 
 def Choices_remove(pnumber):
+    dnumber = Project.query.filter_by(pnumber = pnumber).first()
+    dnumber = dnumber.dnum
     all = triple.filter(Employee.dno == dnumber).all()
     empls = triple.filter(Works_On.pno == pnumber).all()
     global choices_add
@@ -169,6 +171,7 @@ class EmployeeUpdateForm(FlaskForm):
 
 
 class EmplForm(EmployeeUpdateForm):
+    print("form", choices_add)
     essn = SelectField("Employee's Name", choices = choices_add)
     hours = IntegerField('Number of hours', validators=[DataRequired()])
     submit = SubmitField('Assign this Employee')
