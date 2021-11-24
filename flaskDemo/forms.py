@@ -44,6 +44,8 @@ pnumber_save = 0
 
 def Choices_add(pnumber):
     pnumber_save = pnumber
+    print("Printing pnumber")
+    print(pnumber)
     choices_add.clear()
     dnumber = Project.query.filter_by(pnumber = pnumber).first()
     dnumber = dnumber.dnum
@@ -54,6 +56,8 @@ def Choices_add(pnumber):
 
 def Choices_remove(pnumber):
     pnumber_save = pnumber
+    print("Printing pnumber")
+    print(pnumber)
     choices_add.clear()
     dnumber = Project.query.filter_by(pnumber = pnumber).first()
     dnumber = dnumber.dnum
