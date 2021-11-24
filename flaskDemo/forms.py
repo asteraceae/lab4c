@@ -168,12 +168,8 @@ class EmplForm(EmployeeUpdateForm):
 
     def validate_essn(self, essn):
         name = str(essn.data)
-        print("DEBUG \n")
-        print(essn)
-        print(name)
         name = name.split()
         name = name[0]
-        print(name)
         ssn = Employee.query.filter_by(fname = name).first()
         empl = Works_On.query.filter_by(essn = ssn.ssn).first()
         if empl:
@@ -184,14 +180,10 @@ class removeEmplForm(EmployeeUpdateForm):
     submit = SubmitField('Remove this Employee')
 
     def validate_essn(self, essn):    #because dnumber is primary key and should be unique
-        try:
-            name = str(essn.data)
-            print("DEBUG \n")
-            print(essn)
-            print(name)
-            name = name.split()
-            name = name[0]
-            ssn = Employee.query.filter_by(fname = name).first()
-            empl = Works_On.query.filter_by(essn = ssn.ssn).first()
-        except:
+        name = str(essn.data)
+        name = name.split()
+        name = name[0]
+        ssn = Employee.query.filter_by(fname = name).first()
+        empl = Works_On.query.filter_by(essn = ssn.ssn).first()
+        if not empl:
             raise ValidationError("That employee doesn't work in this project!")
