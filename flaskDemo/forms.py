@@ -63,6 +63,7 @@ def Choices_remove(pnumber):
         if x in empls:
             string = x.fname + " " + x.lname
             choices_add.append(string)
+    print("debug " + choices_add)
 
 class RegistrationForm(FlaskForm):
     username = StringField('Username',
