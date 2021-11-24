@@ -50,7 +50,6 @@ def Choices_add(pnumber):
     for x in all:
         string = x.fname + " " + x.lname
         choices_add.append(string)
-    print(choices_add)
 
 def Choices_remove(pnumber):
     choices_add.clear()
@@ -60,7 +59,6 @@ def Choices_remove(pnumber):
     for x in all:
         string = x.fname + " " + x.lname
         choices_add.append(string)
-    print(choices_add)
 
 class RegistrationForm(FlaskForm):
     username = StringField('Username',
@@ -164,7 +162,6 @@ class EmployeeUpdateForm(FlaskForm):
 
 
 class EmplForm(EmployeeUpdateForm):
-    print("form", choices_add)
     essn = SelectField("Employee's Name", choices = choices_add)
     hours = IntegerField('Number of hours', validators=[DataRequired()])
     submit = SubmitField('Assign this Employee')
