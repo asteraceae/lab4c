@@ -45,7 +45,7 @@ regex=regex1 + regex2
 def Choices_add(pnumber):
     dnumber = Project.query.filter_by(pnumber = pnumber).first()
     dnumber = dnumber.dnum
-    all = Employee.query.filter(Employee.dno == dnumber).distinct()
+    all = Employee.query.filter(Employee.dno == dnumber).distinct().all()
     string = all.fname + " " + all.lname
     choices_add.append(string)
     print(choices_add)
@@ -53,7 +53,7 @@ def Choices_add(pnumber):
 def Choices_remove(pnumber):
     dnumber = Project.query.filter_by(pnumber = pnumber).first()
     dnumber = dnumber.dnum
-    all = Employee.query.filter(Employee.dno == dnumber).distinct()
+    all = Employee.query.filter(Employee.dno == dnumber).distinct().all()
     string = all.fname + " " + all.lname
     choices_add.append(string)
     print(choices_add)
