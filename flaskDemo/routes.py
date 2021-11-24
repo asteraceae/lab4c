@@ -4,7 +4,7 @@ from PIL import Image
 from flask import render_template, url_for, flash, redirect, request, abort
 from flaskDemo import app, db, bcrypt
 from flaskDemo.forms import RegistrationForm, LoginForm, UpdateAccountForm, PostForm, DeptForm,DeptUpdateForm, EmplForm, EmployeeUpdateForm, removeEmplForm
-import forms.py
+from flaskDemo.forms import *
 from flaskDemo.models import User, Post,Department, Dependent, Dept_Locations, Employee, Project, Works_On
 from flask_login import login_user, current_user, logout_user, login_required
 from datetime import datetime
@@ -177,7 +177,7 @@ def delete_dept(dnumber):
 @app.route("/empl/<pnumber>/new_assignment", methods=['GET', 'POST'])
 @login_required
 def new_empl_assign(pnumber):
-    forms.Choices_add(pnumber)
+    Choices_add(pnumber)
     form = EmplForm()
     if form.validate_on_submit():
         essn = triple.filter_by(Employee.fname == form.essn.data.split[0]).first()
