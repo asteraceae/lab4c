@@ -59,8 +59,7 @@ def Choices_remove(pnumber):
     all = Employee.query.filter(Employee.dno == dnumber).distinct().all()
     for x in all:
         string = x.fname + " " + x.lname
-        choices_add.append(string)
-    choices_add = [(x, x) for x in choices_add]
+        choices_add.append([string, string])
 
 class RegistrationForm(FlaskForm):
     username = StringField('Username',
