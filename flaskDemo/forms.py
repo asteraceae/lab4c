@@ -39,7 +39,7 @@ regex2='|(1[0-2]))-((0[1-9])|(1\d)|(2[0-8])))|((((0[13578])|(1[02]))-31)|(((0[1,
 regex=regex1 + regex2
 
 choices_add = []
-pnumber_save = null
+pnumber_save = None
 
 
 def Choices_add(pnumber):
