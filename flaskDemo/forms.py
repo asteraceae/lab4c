@@ -183,6 +183,7 @@ class removeEmplForm(EmployeeUpdateForm):
     def validate_essn(self, essn):    #because dnumber is primary key and should be unique
         try:
             name = str(essn)
+            print(essn)
             name = name.split()
             name = name[0]
             ssn = Employee.query.filter_by(fname = name).first()
