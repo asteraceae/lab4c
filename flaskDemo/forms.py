@@ -170,6 +170,7 @@ class EmplForm(EmployeeUpdateForm):
         name = str(essn)
         name = name.split()
         name = name[0]
+        print(name)
         ssn = Employee.query.filter_by(fname = name).first()
         empl = Works_On.query.filter_by(essn = ssn.ssn).first()
         if empl:
