@@ -45,8 +45,8 @@ regex=regex1 + regex2
 def Choices_add(pnumber):
     dnumber = Project.query.filter_by(pnumber = pnumber).first()
     dnumber = dnumber.dnum
-    all = triple.filter(Employee.dno == dnumber).all()
-    empls = triple.filter(Works_On.pno == pnumber).all()
+    all = triple.filter(Employee.dno == dnumber).distinct()
+    empls = triple.filter(Works_On.pno == pnumber).distinct()
     choices_add.clear()
     for x in all:
         if x not in empls:
@@ -57,8 +57,8 @@ def Choices_add(pnumber):
 def Choices_remove(pnumber):
     dnumber = Project.query.filter_by(pnumber = pnumber).first()
     dnumber = dnumber.dnum
-    all = triple.filter(Employee.dno == dnumber).all()
-    empls = triple.filter(Works_On.pno == pnumber).all()
+    all = triple.filter(Employee.dno == dnumber).distinct()
+    empls = triple.filter(Works_On.pno == pnumber).distinct()
     choices_add.clear()
     for x in all:
         print(x)
