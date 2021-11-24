@@ -177,6 +177,7 @@ class EmplForm(EmployeeUpdateForm):
         #now see if ssn exists in works on
         ssn = Employee.query.filter_by(fname = name).first()
         empl = Works_On.query.filter_by(essn = ssn.ssn, pno = pnumber_save).first()
+        print("DEBUG\n")
         print(empl)
         if empl:
             raise ValidationError("That employee already works there!  You can't assign them to this project.")
@@ -194,6 +195,7 @@ class removeEmplForm(EmployeeUpdateForm):
         ssn = Employee.query.filter_by(fname = name).first()
         #now see if ssn exists in works on
         empl = Works_On.query.filter_by(essn = ssn.ssn, pno = pnumber_save).first()
+        print("DEBUG\n")
         print(empl)
         if empl == None:
             raise ValidationError("That employee doesn't work in this project!")
