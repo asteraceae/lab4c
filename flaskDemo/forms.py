@@ -43,6 +43,7 @@ pnumber_save = 0
 
 
 def Choices_add(pnumber):
+    global pnumber_save
     pnumber_save = pnumber
     print("Printing pnumber")
     print(pnumber)
