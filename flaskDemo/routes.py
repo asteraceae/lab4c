@@ -3,7 +3,8 @@ import secrets
 from PIL import Image
 from flask import render_template, url_for, flash, redirect, request, abort
 from flaskDemo import app, db, bcrypt
-from flaskDemo.forms import RegistrationForm, LoginForm, UpdateAccountForm, PostForm, DeptForm,DeptUpdateForm, EmplForm, EmployeeUpdateForm, removeEmplForm, Choice_add
+from flaskDemo.forms import RegistrationForm, LoginForm, UpdateAccountForm, PostForm, DeptForm,DeptUpdateForm, EmplForm, EmployeeUpdateForm, removeEmplForm
+import forms
 from flaskDemo.models import User, Post,Department, Dependent, Dept_Locations, Employee, Project, Works_On
 from flask_login import login_user, current_user, logout_user, login_required
 from datetime import datetime
@@ -176,7 +177,7 @@ def delete_dept(dnumber):
 @app.route("/empl/<pnumber>/new_assignment", methods=['GET', 'POST'])
 @login_required
 def new_empl_assign(pnumber):
-    Choices_add(pnumber)
+    forms.Choices_add(pnumber)
     form = EmplForm()
     if form.validate_on_submit():
         essn = triple.filter_by(Employee.fname == form.essn.data.split[0]).first()
@@ -192,7 +193,6 @@ def new_empl_assign(pnumber):
 @app.route("/empl/<pnumber>/remove", methods=['GET', 'POST'])
 @login_required
 def remove_empl_assign(pnumber):
-    Choices_add(pnumber)
     form = removeEmplForm()
     if form.validate_on_submit():
         empl = Works_On.query.filter_by(essn = form.essn.data, pno = pnumber).first()

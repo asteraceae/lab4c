@@ -34,9 +34,6 @@ for row in pnums:
 pnumschoices = [(row['pnumber'], row['pnumber']) for row in pnumslist]
 
 choices_add = []
-choices_remove = []
-
-pnumber = 2
 
 triple = Employee.query.join(Works_On).join(Project).add_columns(Employee.ssn, Employee.dno, Employee.fname, Employee.lname, Project.plocation, Project.pname, Project.dnum, Project.pnumber, Works_On.pno, Works_On.essn, Works_On.hours)
 
@@ -45,7 +42,7 @@ regex2='|(1[0-2]))-((0[1-9])|(1\d)|(2[0-8])))|((((0[13578])|(1[02]))-31)|(((0[1,
 regex=regex1 + regex2
 
 
-class Choices_add(pnumber):
+def Choices_add(pnumber):
     empls = triple.filter(Works_On.pno == pnumber).all()
     choices_add = []
     for x in empls:
