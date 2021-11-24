@@ -166,7 +166,7 @@ class EmplForm(EmployeeUpdateForm):
     hours = IntegerField('Number of hours', validators=[DataRequired()])
     submit = SubmitField('Assign this Employee')
 
-    def validate_pnumber(self, essn):
+    def validate_essn(self, essn):
         name = essn
         name = name.split()
         name = name[0]
@@ -179,12 +179,12 @@ class removeEmplForm(EmployeeUpdateForm):
     essn = SelectField("Employee's Name", choices = choices_add)
     submit = SubmitField('Remove this Employee')
 
-    def validate_pnumber(self, essn):    #because dnumber is primary key and should be unique
+    def validate_essn(self, essn):    #because dnumber is primary key and should be unique
         try:
             name = essn
             name = name.split()
             name = name[0]
             ssn = Employee.query.filter_by(fname = name).first()
-            empl = Works_On.query.filter_by(essn = ssn.ssn).first()   
+            empl = Works_On.query.filter_by(essn = ssn.ssn).first()
         except:
             raise ValidationError("That employee doesn't work in this project!")
