@@ -22,16 +22,16 @@
                 {% endif %}
             </div>
 			<div class="form-group">
-                {{ form.emp_ssn.label(class="form-control-label") }}
-                {% if form.emp_ssn.errors %}
-                    {{ form.emp_ssn(class="form-control form-control-lg is-invalid") }}
+                {{ form.essn.label(class="form-control-label") }}
+                {% if form.essn.errors %}
+                    {{ form.essn(class="form-control form-control-lg is-invalid") }}
                     <div class="invalid-feedback">
-                        {% for error in form.emp_ssn.errors %}
+                        {% for error in form.essn.errors %}
                             <span>{{ error }}</span>
                         {% endfor %}
                     </div>
                 {% else %}
-                    {{ form.emp_ssn(class="form-control form-control-lg") }}
+                    {{ form.essn(class="form-control form-control-lg") }}
                 {% endif %}
             </div>
 
