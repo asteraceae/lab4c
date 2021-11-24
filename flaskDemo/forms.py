@@ -47,8 +47,7 @@ def Choices_add(pnumber):
     dnumber = dnumber.dnum
     all = triple.filter(Employee.dno == dnumber).all()
     empls = triple.filter(Works_On.pno == pnumber).all()
-    global choices_add
-    choices_add = []
+    choices_add.clear()
     for x in all:
         if x not in empls:
             string = x.fname + " " + x.lname
@@ -60,8 +59,7 @@ def Choices_remove(pnumber):
     dnumber = dnumber.dnum
     all = triple.filter(Employee.dno == dnumber).all()
     empls = triple.filter(Works_On.pno == pnumber).all()
-    global choices_add
-    choices_add = []
+    choices_add.clear()
     for x in all:
         print(x)
         if x in empls:
