@@ -193,6 +193,7 @@ def new_empl_assign(pnumber):
 @app.route("/empl/<pnumber>/remove", methods=['GET', 'POST'])
 @login_required
 def remove_empl_assign(pnumber):
+    Choices_remove(pnumber)
     form = removeEmplForm()
     if form.validate_on_submit():
         empl = Works_On.query.filter_by(essn = form.essn.data, pno = pnumber).first()
