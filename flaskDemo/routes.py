@@ -9,10 +9,6 @@ from flaskDemo.models import User, Post,Department, Dependent, Dept_Locations, E
 from flask_login import login_user, current_user, logout_user, login_required
 from datetime import datetime
 
-
-triple = Employee.query.join(Works_On).join(Project).add_columns(Employee.ssn, Employee.dno, Employee.fname, Employee.lname, Project.plocation, Project.pname, Project.dnum, Project.pnumber, Works_On.pno, Works_On.essn, Works_On.hours)
-
-
 @app.route("/")
 @app.route("/home")
 def home():
@@ -131,6 +127,8 @@ def dept(dnumber):
     projlist = []
     #iterate through all projects so that we can get the employees meant for each project
     for proj in projs:
+        #THIS WAS THE ISSUE
+        #The query at the top of this .py 'triple' was the issue since it was not refreshing each time dept is refreshed.  
         empls= Employee.query.join(Works_On).filter_by(pno = proj.pnumber).all()
         emplist = []
         for emp in empls:
