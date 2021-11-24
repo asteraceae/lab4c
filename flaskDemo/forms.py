@@ -49,8 +49,8 @@ class Choices_add(pnumber):
     empls = triple.filter(Works_On.pno == pnumber).all()
     choices_add = []
     for x in empls:
-        string = empl.fname + " " + lname
-        choices_add.append(empl.lname)
+        string = x.fname + " " + x.lname
+        choices_add.append(string)
 
 class RegistrationForm(FlaskForm):
     username = StringField('Username',
