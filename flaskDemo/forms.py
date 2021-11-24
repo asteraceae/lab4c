@@ -45,26 +45,17 @@ regex=regex1 + regex2
 def Choices_add(pnumber):
     dnumber = Project.query.filter_by(pnumber = pnumber).first()
     dnumber = dnumber.dnum
-    all = triple.filter(Employee.dno == dnumber).distinct()
-    empls = triple.filter(Works_On.pno == pnumber).distinct()
-    choices_add.clear()
-    for x in all:
-        if x not in empls:
-            string = x.fname + " " + x.lname
-            choices_add.append(string)
-            print("this is the string" + string)
+    all = Employee.query.filter(Employee.dno == dnumber).distinct()
+    string = x.fname + " " + x.lname
+    choices_add.append(string)
+    print(choices_add)
 
 def Choices_remove(pnumber):
     dnumber = Project.query.filter_by(pnumber = pnumber).first()
     dnumber = dnumber.dnum
-    all = triple.filter(Employee.dno == dnumber).distinct()
-    empls = triple.filter(Works_On.pno == pnumber).distinct()
-    choices_add.clear()
-    for x in all:
-        print(x)
-        if x in empls:
-            string = x.fname + " " + x.lname
-            choices_add.append(string)
+    all = Employee.query.filter(Employee.dno == dnumber).distinct()
+    string = x.fname + " " + x.lname
+    choices_add.append(string)
     print(choices_add)
 
 class RegistrationForm(FlaskForm):
@@ -179,5 +170,5 @@ class EmplForm(EmployeeUpdateForm):
          #if employee in assign raise validation errpr
 
 class removeEmplForm(EmployeeUpdateForm):
-    essn = SelectField("Employee's SSN", choices = choices_add)
+    essn = SelectField("Employee's Name", choices = choices_add)
     submit = SubmitField('Remove this Employee')
