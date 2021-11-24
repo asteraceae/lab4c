@@ -197,6 +197,7 @@ def remove_empl_assign(pnumber):
     Choices_remove(pnumber)
     form = removeEmplForm()
     if form.validate_on_submit():
+        print(form.essn.data)
         essn = triple.filter_by(Employee.fname == form.essn.data[0].split[0]).first()
         print(essn)
         empl = Works_On.query.filter_by(essn = essn.ssn, pno = pnumber).first()
