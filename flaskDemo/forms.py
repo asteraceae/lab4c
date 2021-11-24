@@ -38,8 +38,12 @@ regex1='^((((19|20)(([02468][048])|([13579][26]))-02-29))|((20[0-9][0-9])|(19[0-
 regex2='|(1[0-2]))-((0[1-9])|(1\d)|(2[0-8])))|((((0[13578])|(1[02]))-31)|(((0[1,3-9])|(1[0-2]))-(29|30)))))$'
 regex=regex1 + regex2
 
+choices_add = []
+pnumber_save = null
+
 
 def Choices_add(pnumber):
+    pnumber_save = pnumber
     choices_add.clear()
     dnumber = Project.query.filter_by(pnumber = pnumber).first()
     dnumber = dnumber.dnum
@@ -49,6 +53,7 @@ def Choices_add(pnumber):
         choices_add.append([string, string])
 
 def Choices_remove(pnumber):
+    pnumber_save = pnumber
     choices_add.clear()
     dnumber = Project.query.filter_by(pnumber = pnumber).first()
     dnumber = dnumber.dnum
@@ -171,7 +176,7 @@ class EmplForm(EmployeeUpdateForm):
         name = name[0]
         #now see if ssn exists in works on
         ssn = Employee.query.filter_by(fname = name).first()
-        empl = Works_On.query.filter_by(essn = ssn.ssn).first()
+        empl = Works_On.query.filter_by(essn = ssn.ssn, pno = pnumber_save).first()
         if empl:
             raise ValidationError("That employee already works there!  You can't assign them to this project.")
 
@@ -187,6 +192,6 @@ class removeEmplForm(EmployeeUpdateForm):
         #get ssn using name
         ssn = Employee.query.filter_by(fname = name).first()
         #now see if ssn exists in works on
-        empl = Works_On.query.filter_by(essn = ssn.ssn).first()
+        empl = Works_On.query.filter_by(essn = ssn.ssn, pno = pnumber_save).first()
         if not empl:
             raise ValidationError("That employee doesn't work in this project!")
