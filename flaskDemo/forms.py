@@ -45,8 +45,6 @@ pnumber_save = 0
 def Choices_add(pnumber):
     global pnumber_save
     pnumber_save = pnumber
-    print("Printing pnumber")
-    print(pnumber)
     choices_add.clear()
     dnumber = Project.query.filter_by(pnumber = pnumber).first()
     dnumber = dnumber.dnum
@@ -56,9 +54,8 @@ def Choices_add(pnumber):
         choices_add.append([string, string])
 
 def Choices_remove(pnumber):
+    global pnumber_save
     pnumber_save = pnumber
-    print("Printing pnumber")
-    print(pnumber)
     choices_add.clear()
     dnumber = Project.query.filter_by(pnumber = pnumber).first()
     dnumber = dnumber.dnum
@@ -181,11 +178,7 @@ class EmplForm(EmployeeUpdateForm):
         name = name[0]
         #now see if ssn exists in works on
         ssn = Employee.query.filter_by(fname = name).first()
-        print(ssn.ssn)
-        print(pnumber_save)
         empl = Works_On.query.filter_by(essn = ssn.ssn, pno = pnumber_save).first()
-        print("DEBUG\n")
-        print(empl)
         if empl:
             raise ValidationError("That employee already works there!  You can't assign them to this project.")
 
@@ -202,7 +195,5 @@ class removeEmplForm(EmployeeUpdateForm):
         ssn = Employee.query.filter_by(fname = name).first()
         #now see if ssn exists in works on
         empl = Works_On.query.filter_by(essn = ssn.ssn, pno = pnumber_save).first()
-        print("DEBUG\n")
-        print(empl)
         if empl == None:
             raise ValidationError("That employee doesn't work in this project!")
