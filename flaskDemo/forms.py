@@ -50,6 +50,7 @@ def Choices_add(pnumber):
     for x in all:
         string = x.fname + " " + x.lname
         choices_add.append(string)
+    choices_add = [(x, x) for x in choices_add]
 
 def Choices_remove(pnumber):
     choices_add.clear()
@@ -59,6 +60,7 @@ def Choices_remove(pnumber):
     for x in all:
         string = x.fname + " " + x.lname
         choices_add.append(string)
+    choices_add = [(x, x) for x in choices_add]
 
 class RegistrationForm(FlaskForm):
     username = StringField('Username',
