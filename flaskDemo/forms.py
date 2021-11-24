@@ -193,5 +193,6 @@ class removeEmplForm(EmployeeUpdateForm):
         ssn = Employee.query.filter_by(fname = name).first()
         #now see if ssn exists in works on
         empl = Works_On.query.filter_by(essn = ssn.ssn, pno = pnumber_save).first()
+        print(empl)
         if not empl:
             raise ValidationError("That employee doesn't work in this project!")
