@@ -36,11 +36,21 @@ pnumschoices = [(row['pnumber'], row['pnumber']) for row in pnumslist]
 choices_add = []
 choices_remove = []
 
+pnumber = 2
+
 triple = Employee.query.join(Works_On).join(Project).add_columns(Employee.ssn, Employee.dno, Employee.fname, Employee.lname, Project.plocation, Project.pname, Project.dnum, Project.pnumber, Works_On.pno, Works_On.essn, Works_On.hours)
 
 regex1='^((((19|20)(([02468][048])|([13579][26]))-02-29))|((20[0-9][0-9])|(19[0-9][0-9]))-((((0[1-9])'
 regex2='|(1[0-2]))-((0[1-9])|(1\d)|(2[0-8])))|((((0[13578])|(1[02]))-31)|(((0[1,3-9])|(1[0-2]))-(29|30)))))$'
 regex=regex1 + regex2
+
+
+class Choices_add(pnumber):
+    empls = triple.filter(Works_On.pno == pnumber).all()
+    choices_add = []
+    for x in empls:
+        string = empl.fname + " " + lname
+        choices_add.append(empl.lname)
 
 class RegistrationForm(FlaskForm):
     username = StringField('Username',
@@ -141,13 +151,6 @@ class EmployeeUpdateForm(FlaskForm):
     #pnumber = SelectField("Project number", choices = pnumslist)
     #emp_ssn = SelectField("Employee's SSN", choices = essnchoices)
     submit = SubmitField('Update this Employee')
-
-def Choices_add(pnumber):
-    empls = triple.filter(Works_On.pno == pnumber).all()
-    choices_add = []
-    for x in empls:
-        string = empl.fname + " " + lname
-        choices_add.append(empl.lname)
 
 
 class EmplForm(EmployeeUpdateForm):
