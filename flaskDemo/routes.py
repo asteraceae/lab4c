@@ -181,6 +181,7 @@ def new_empl_assign(pnumber):
     form = EmplForm()
     if form.validate_on_submit():
         essn = triple.filter_by(Employee.fname == form.essn.data.split[0]).first()
+        print("the essn is", essn)
         empl = Works_On(pno = pnumber, essn = essn.ssn, hours = form.hours.data)
         db.session.add(empl)
         db.session.commit()
@@ -196,7 +197,9 @@ def remove_empl_assign(pnumber):
     Choices_remove(pnumber)
     form = removeEmplForm()
     if form.validate_on_submit():
-        empl = Works_On.query.filter_by(essn = form.essn.data, pno = pnumber).first()
+        essn = triple.filter_by(Employee.fname == form.essn.data.split[0]).first()
+        print("the essn is", essn)
+        empl = Works_On.query.filter_by(essn = essn.ssn, pno = pnumber).first()
         db.session.delete(empl)
         db.session.commit()
         flash('You have removed an employee assignment!', 'danger')
