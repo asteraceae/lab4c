@@ -131,7 +131,7 @@ def dept(dnumber):
     projlist = []
     #iterate through all projects so that we can get the employees meant for each project
     for proj in projs:
-        empls= Employee.query.join(Works_On).filter_by(Works_On.pno = proj.pnumber).all()
+        empls= Employee.query.join(Works_On).filter_by(pno = proj.pnumber).all()
         emplist = []
         for emp in empls:
             emplist.append(emp)
