@@ -2,14 +2,16 @@ body {
   background: #fafafa;
   color: #333333;
   margin-top: 5rem;
+  font-family: "Arial";
 }
 
 h1, h2, h3, h4, h5, h6 {
   color: #444444;
+  font-family: "Arial";
 }
 
 .bg-steel {
-  background-color: #5f788a;
+  background-color: #c0a1ff;
 }
 
 .site-header .navbar-nav .nav-link {
