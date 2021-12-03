@@ -10,7 +10,7 @@ db.Model.metadata.reflect(db.engine)
 def load_user(user_id):
     return User.query.get(int(user_id))
 
-
+#why wont it push
 class User(db.Model, UserMixin):
     __table_args__ = {'extend_existing': True}
     id = db.Column(db.Integer, primary_key=True)
